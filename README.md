@@ -1,8 +1,10 @@
 # Backup Missing iPhone Pictures on Windows with Python
 
-On Windows, identify which photos on your iPhone are not already in your local directory and then copy them over into a target folder. Currently the script is configured to check if the iPhone photos are already in *check* folder "D:\Photos" in lines 7-15, and then copies over missing photos into *target* folder "This PC\Data (D:)\Photos\temp" in lines 27-52.
+On Windows, identify which photos on your iPhone are not already in your local directory and then copy them over into a target folder. 
 
-After changing the "check" folder and the "target" folders, simply run the code as below.
+Currently the script is configured to check if the iPhone photos are already in the "check" folder "D:\Photos" in lines 7-15, and then copies over missing photos into "target" folder "This PC\Data (D:)\Photos\temp" in lines 27-52.
+
+After changing the "check" folder and the "target" folders to your personal file setup, simply run the code as below.
 	
 	python backup_phone.py
 
