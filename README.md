@@ -1,4 +1,4 @@
-# Backup Missing iPhone Pictures on Windows with Python
+# Backup Missing iPhone Pictures on Windows w/ Python
 
 On Windows, identify which photos on your iPhone are not already in your local directory and then copy them over into a target folder. 
 
