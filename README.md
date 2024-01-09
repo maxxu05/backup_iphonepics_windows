@@ -17,4 +17,4 @@ The only requirements to run the code is pywin32 (with python 3.11) and tqdm, wh
 
 
 ## Acknowledgmenets
-Huge thanks to Jack Chang on Stack Exchange, who (as far as I can tell as of 12/24/2022) posted the only public code to help solve the issue of how to copy and paste iPhone photos [here](https://stackoverflow.com/a/72842087), which was inspired from Stephen Brodie's post [here](https://stackoverflow.com/a/65825617).
+Huge thanks to Jack Chang and Stephen Brodie on Stack Exchange, who (as far as I can tell as of 12/24/2022) posted the only public code to help solve the issue on how to copy and paste iPhone photos [here](https://stackoverflow.com/a/72842087) and [here](https://stackoverflow.com/a/65825617), respectively.
