@@ -25,6 +25,7 @@ import pythoncom
 desktop = shell.SHGetDesktopFolder()
 
 #################################################################
+# make sure this is correct!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Missing photos are copied to Destination Folder of "This PC\Data (D:)\Photos\temp"
 #################################################################
 
@@ -34,7 +35,7 @@ for pidl in desktop:
         break
 dstFolder = desktop.BindToObject(pidl_dst, None, shell.IID_IShellFolder)
 for pidl in dstFolder:
-    if dstFolder.GetDisplayNameOf(pidl, shellcon.SHGDN_NORMAL) == "DATA (D:)":
+    if dstFolder.GetDisplayNameOf(pidl, shellcon.SHGDN_NORMAL) == "DATA (D:)": # might need to rename D file to match
         pidl_dst = pidl
         break
 dstFolder = dstFolder.BindToObject(pidl_dst, None, shell.IID_IShellFolder)
@@ -76,18 +77,21 @@ for pidl in folder:
         break
 folder = folder.BindToObject(pidl_get, None, shell.IID_IShellFolder)
 
-for pidl in folder:
-    if folder.GetDisplayNameOf(pidl, shellcon.SHGDN_NORMAL) == "DCIM":
-        pidl_get = pidl
-        break
-folder = folder.BindToObject(pidl_get, None, shell.IID_IShellFolder)
+# new iphones do not have DCIM folder
+# for pidl in folder:
+#     if folder.GetDisplayNameOf(pidl, shellcon.SHGDN_NORMAL) == "DCIM":
+#         pidl_get = pidl
+#         break
+# folder = folder.BindToObject(pidl_get, None, shell.IID_IShellFolder)
 
 #################################################################
 # Iterating Through Each iPhone photo folder and photo
 #################################################################
 
 newfiles = 0
+totalfiles = 0
 for pidl in tqdm(folder, desc="Folder"): # for each folder inside DCIM
+    # uncomment this to see each folder
     # print(folder.GetDisplayNameOf(pidl, shellcon.SHGDN_NORMAL))
     pidl_get = pidl
     folderPIDL = pidl_get
@@ -95,15 +99,16 @@ for pidl in tqdm(folder, desc="Folder"): # for each folder inside DCIM
 
     for pidl_img in (pbar := tqdm(folder, desc="Files", leave=False)): 
         end = time.time()
-        pbar.set_description(f"Total New Files {newfiles}, Min Elapsed {int((end-start)//60)}")
+        pbar.set_description(f"Total New Files {newfiles}, Total Files {totalfiles}, Min Elapsed {int((end-start)//60)}")
 
         imgPIDL = pidl_img
         filename = folder.GetDisplayNameOf(pidl_img, shellcon.SHGDN_NORMAL)
-
+        totalfiles += 1
         if filename not in filenames:
             # import pdb; pdb.set_trace()
             newfiles += 1
             
+            # comment this while chunk out to check if the new files is being updated correctly.... so finnicky
             while not os.path.exists(f"D:/Photos/temp/{filename}"):
                 fidl = shell.SHGetIDListFromObject(folder) #Grab the PIDL from the folder object
                 
@@ -116,4 +121,5 @@ for pidl in tqdm(folder, desc="Folder"): # for each folder inside DCIM
 
                 success = pfo.PerformOperations() #perform operation
 
-print(f"Total New Files {newfiles}, Min Elapsed {(end-start)//60}")
+print(totalfiles)
+print(f"Total New Files {newfiles}, Total Files {totalfiles}, Min Elapsed {(end-start)//60}")

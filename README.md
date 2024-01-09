@@ -10,7 +10,7 @@ After changing the "check" folder and the "target" folders to your personal file
 
 
 
-The only requirements to run the code is pywin32 and tqdm, which you can install below. 
+The only requirements to run the code is pywin32 (with python 3.11) and tqdm, which you can install below. 
 
 	pip install pywin32==305
 	pip install tqdm==4.64.1
